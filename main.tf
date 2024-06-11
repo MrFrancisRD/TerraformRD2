@@ -21,4 +21,12 @@ resource "aws_instance" "nginx-server" {
   ami           = "ami-00beae93a2d981137"
   instance_type = "t2.micro"
 
+###### Instalando nginx in our aws machine ##########
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo yum install -y nginx
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+              EOF
+
 }
