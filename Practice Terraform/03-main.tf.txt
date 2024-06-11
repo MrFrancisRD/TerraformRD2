@@ -1,5 +1,5 @@
-# launch first instance in aws web service
-# Basic Terraform
+# Adding resource ssh key and link resource ssh with EC2 instance resource.
+
 terraform {
   required_providers {
     aws = {
@@ -28,13 +28,9 @@ resource "aws_instance" "nginx-server" {
               sudo systemctl enable nginx
               sudo systemctl start nginx
               EOF
-
+              
   # link resource to ssh since my EC2 Instance
   key_name = aws_key_pair.nginx-server-ssh.key_name
-
-  # link SG resource
-
-  vpc_security_group_ids = [ aws_security_group.nginx-server-sg.id ]
 }
 
 #adding ssh key to my EC2 Instance
@@ -42,36 +38,5 @@ resource "aws_instance" "nginx-server" {
 resource "aws_key_pair" "nginx-server-ssh" {
   key_name = "nginx-server-ssh"
   public_key = file("nginx-server.key.pub")
-  
-}
-
-############ SG (Security Group) ##########
-
-resource "aws_security_group" "nginx-server-sg" {
-
-  name = "nginx-server-sg"
-  description = "Security group allowing SSH and HTTP access"
-
-   ingress {
-    from_port   = 22 #accept all port in
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  
-  egress {
-    from_port        = 0 # accept all port out
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
   
 }

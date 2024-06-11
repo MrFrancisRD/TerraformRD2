@@ -53,7 +53,7 @@ resource "aws_security_group" "nginx-server-sg" {
   description = "Security group allowing SSH and HTTP access"
 
    ingress {
-    from_port   = 22 #accept all port in
+    from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -67,7 +67,7 @@ resource "aws_security_group" "nginx-server-sg" {
   }
   
   egress {
-    from_port        = 0 # accept all port out
+    from_port        = 0 # acepted all port
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
