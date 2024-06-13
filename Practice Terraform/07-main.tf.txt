@@ -1,8 +1,4 @@
-# launch first instance in aws web service
-# Basic Terraform
-# add tags on aws instance, SG,KEY
-#working with output on terraform
-# working variable on terraform
+###### working variable on terraform  ######
 
 variable "ami_id" {
 
@@ -19,7 +15,7 @@ variable "instance_type" {
 variable "server_name" {
 
   description = "Name of server EC2 instance"
-  default = "nginx-server"
+  default = "webserver"
   
 }
 
@@ -47,8 +43,8 @@ provider "aws" {
 ####  Resource ######
 
 resource "aws_instance" "nginx-server" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
+  ami           = "ami-00beae93a2d981137"
+  instance_type = "t2.micro"
 
 ###### Installing nginx in aws machine ##########
   user_data = <<-EOF
@@ -67,8 +63,8 @@ resource "aws_instance" "nginx-server" {
 
   # adding tags aws EC2 Instance
   tags = {
-    Name = var.server_name
-    Environment = var.environment
+    Name = "nginx-server"
+    Environment = "dev"
     Owner = "myemployeess@mysoftwareRD.com"
     Team = "Devops"
     Project = "Webinar-Caosbinario-Terraform"
@@ -78,12 +74,12 @@ resource "aws_instance" "nginx-server" {
 #adding ssh key to my EC2 Instance
 
 resource "aws_key_pair" "nginx-server-ssh" {
-  key_name = "${var.server_name}-ssh"
-  public_key = file("${var.server_name}.key.pub")
+  key_name = "nginx-server-ssh"
+  public_key = file("nginx-server.key.pub")
 
    # adding tags ssh key pair
   tags = {
-    Name = "${var.server_name}-ssh"
+    Name = "nginx-server-ssh"
     Environment = "dev"
     Owner = "myemployeess@mysoftwareRD.com"
     Team = "Devops"
@@ -96,7 +92,7 @@ resource "aws_key_pair" "nginx-server-ssh" {
 
 resource "aws_security_group" "nginx-server-sg" {
 
-  name = "${var.server_name}-sg"
+  name = "nginx-server-sg"
   description = "Security group allowing SSH and HTTP access"
 
    ingress {
@@ -122,7 +118,7 @@ resource "aws_security_group" "nginx-server-sg" {
 
 # adding tags out aws SG
 tags = {
-    Name = "${var.server_name}-sg"
+    Name = "nginx-server-sg"
     Environment = "dev"
     Owner = "myemployeess@mysoftwareRD.com"
     Team = "Devops"
