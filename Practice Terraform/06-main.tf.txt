@@ -1,7 +1,5 @@
-# launch first instance in aws web service
-# Basic Terraform
-# add tags on aws instance, SG,KEY
-#working with output on terraform
+##### working with output on terraform ########
+
 terraform {
   required_providers {
     aws = {
@@ -104,7 +102,7 @@ tags = {
   
 }
 
-######### Output ###############
+######### Output on Terraform ###############
 
 # Get Public IP
 

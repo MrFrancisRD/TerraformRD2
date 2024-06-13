@@ -1,0 +1,8 @@
+# creating ssh key
+
+# ssh-keygen -t rsa -b 2048 -f "nginx-server.key"
+
+
+connect to ec2 instance using ssh command
+
+ssh ec2-user@54.90.144.5 -i .\nginx-server.key
