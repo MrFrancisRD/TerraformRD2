@@ -7,11 +7,6 @@
 ### this main is not used in this case.check
 # File Created.chec"
 
-# Improving my terraform code.
+# Declarate Module
 
-# 00.variable.tf
-# 01.provider.tf
-# 02.ec2.tf
-# 03.key.tf
-# 04.sg.tf
-# terraform.tfvars
+######## Module ############
