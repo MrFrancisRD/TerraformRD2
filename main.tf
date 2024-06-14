@@ -14,7 +14,7 @@ terraform {
   backend "s3" {
     
     bucket = "terraformrd2" # name of my bucket s3
-    key = "terraform.tfstate" #my ftstate file 
+    key = "terraform.tfstate" #my ftstate file if you want this folder/key file
     region = "us-east-1"
   }
 }
