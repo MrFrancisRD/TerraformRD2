@@ -8,6 +8,16 @@
 # File Created.chec"
 
 # Declarate Module
+# working aws S3 for storage out tftate file
+
+terraform {
+  backend "s3" {
+    
+    bucket = "terraformrd2" # name of my bucket s3
+    key = "terraform.tfstate" #my ftstate file 
+    region = "us-east-1"
+  }
+}
 
 ######## Module ############
 module "nginx_server_dev" {
